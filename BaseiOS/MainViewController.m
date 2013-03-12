@@ -21,7 +21,7 @@
 {
     [super viewDidAppear:animated];
     
-    UILabel* labelNavTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 40, 170, 40)];
+    UILabel* labelNavTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 190, 40)];
     labelNavTitle.textColor = [UIColor whiteColor];
     labelNavTitle.backgroundColor = [UIColor clearColor];
     

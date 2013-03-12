@@ -22,7 +22,7 @@
 - (void)drawRect:(CGRect)rect
 {
 	UIImage *image = [UIImage imageNamed:@"twitter.png"];
-	[image drawInRect:CGRectMake(5, 3, image.size.width, image.size.height)];
+	[image drawInRect:CGRectMake(5, 7, image.size.width, image.size.height)];
 }
 
 @end
