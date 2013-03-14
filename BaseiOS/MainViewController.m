@@ -26,7 +26,7 @@
     labelNavTitle.backgroundColor = [UIColor clearColor];
     
     labelNavTitle.textAlignment = UITextAlignmentLeft;
-    Customer *currentCustomer = [APPUserDefaultsHandler currentCustomer];
+    Customer *currentCustomer = [AppUserDefaultsHandler currentCustomer];
     
     if (currentCustomer) {
         labelNavTitle.text = [NSString stringWithFormat:@"@%@", currentCustomer.twitterName];
@@ -45,7 +45,7 @@
 
 - (IBAction)buttonLogoutTapped:(id *)sender
 {
-    [APPUserDefaultsHandler setCurrentUCustomer:nil];
+    [AppUserDefaultsHandler setCurrentCustomer:nil];
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
     [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
     

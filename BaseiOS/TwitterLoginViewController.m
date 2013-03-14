@@ -38,7 +38,7 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex != (actionSheet.numberOfButtons - 1)) {
-        [self performReverseAuthForAccount:_accounts[buttonIndex]];
+        [self performReverseAuthForAccount:self.accounts[buttonIndex]];
     }
 }
 
@@ -71,7 +71,7 @@
                                              }
                                              
                                              [ApiHelper signInWithTwitterData:twitterData
-                                                              andCompletition:^(NSDictionary *json, NSError *error) {
+                                                                andCompletion:^(NSDictionary *json, NSError *error) {
                                                                   
                                                                   
                                                                   self.buttonLogin.hidden = NO;
@@ -80,7 +80,7 @@
                                                                       
                                                                       NSDictionary *customer = [json objectForKey:@"customer"];
                                                                       Customer *currentCustomer = [[Customer alloc] initFromDictionary:customer];
-                                                                      [APPUserDefaultsHandler setCurrentUCustomer:currentCustomer];
+                                                                      [AppUserDefaultsHandler setCurrentCustomer:currentCustomer];
                                                                       [self dismissModalViewControllerAnimated:YES];
                                                                       
                                                                   } else {
@@ -137,7 +137,7 @@
         
         if (granted && [TWAPIManager isLocalTwitterAccountAvailable] && self.accounts.count > 0) {
             if (self.accounts.count == 1) {
-                [self performReverseAuthForAccount:_accounts[0]];
+                [self performReverseAuthForAccount:self.accounts[0]];
                 
             } else {
                 UIActionSheet *sheet = [[UIActionSheet alloc]
@@ -147,12 +147,12 @@
                                         destructiveButtonTitle:nil
                                         otherButtonTitles:nil];
                 
-                for (ACAccount *acct in _accounts) {
+                for (ACAccount *acct in self.accounts) {
                     [sheet addButtonWithTitle:acct.username];
                 }
                 
                 [sheet addButtonWithTitle:@"Cancel"];
-                [sheet setDestructiveButtonIndex:[_accounts count]];
+                [sheet setDestructiveButtonIndex:[self.accounts count]];
                 [sheet showInView:self.view];
             }
         } else {

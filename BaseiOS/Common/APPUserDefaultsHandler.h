@@ -1,5 +1,5 @@
 //
-//  APPUserDefaultsHandler.h
+//  AppUserDefaultsHandler.h
 //  BaseiOS
 //
 //  Created by Stojce Slavkovski on 3/11/13.
@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface APPUserDefaultsHandler : NSObject
+@interface AppUserDefaultsHandler : NSObject
 
-+(void)setCurrentUCustomer:(Customer *)currentCustomer;
++(void)setCurrentCustomer:(Customer *)currentCustomer;
 +(Customer *)currentCustomer;
 
 @end

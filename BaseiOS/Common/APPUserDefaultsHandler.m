@@ -1,12 +1,12 @@
 //
-//  APPUserDefaultsHandler.m
+//  AppUserDefaultsHandler.m
 //  BaseiOS
 //
 //  Created by Stojce Slavkovski on 3/11/13.
 //  Copyright (c) 2013 HighFidelity.io. All rights reserved.
 //
 
-#import "APPUserDefaultsHandler.h"
+#import "AppUserDefaultsHandler.h"
 
 // define a way to quickly grab and set NSUserDefaults
 #define DEFAULTS(type, key) ([[NSUserDefaults standardUserDefaults] type##ForKey:key])
@@ -15,11 +15,11 @@
 [[NSUserDefaults standardUserDefaults] synchronize];\
 } while (0)
 
-@implementation APPUserDefaultsHandler
+@implementation AppUserDefaultsHandler
 
 NSString* const kCurrentCustomer = @"loggedCustomer";
 
-+ (void)setCurrentUCustomer:(Customer *)currentCustomer
++ (void)setCurrentCustomer:(Customer *)currentCustomer
 {
     // encode the user object
     NSData *encodedUser = [NSKeyedArchiver archivedDataWithRootObject:currentCustomer];
