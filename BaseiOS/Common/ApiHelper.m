@@ -13,7 +13,7 @@
 
 #pragma mark - Sign in
 + (void)signInWithTwitterData:(NSDictionary *)twitterData
-              andCompletition:(void(^)(NSDictionary *json, NSError *error))completion
+                andCompletion:(void(^)(NSDictionary *json, NSError *error))completion
 {
     
     NSURL *apiUrl = [NSURL URLWithString:kApiURL];

@@ -23,7 +23,6 @@
 		E4A0A4E216EA92F300490F08 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A0A4E116EA92F300490F08 /* main.m */; };
 		E4A0A4E616EA92F300490F08 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A0A4E516EA92F300490F08 /* AppDelegate.m */; };
 		E4A0A4EF16EA92F300490F08 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4A0A4ED16EA92F300490F08 /* MainStoryboard_iPhone.storyboard */; };
-		E4A0A4F216EA92F300490F08 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4A0A4F016EA92F300490F08 /* MainStoryboard_iPad.storyboard */; };
 		E4A0A50216EB240100490F08 /* globe.png in Resources */ = {isa = PBXBuildFile; fileRef = E4A0A50016EB240100490F08 /* globe.png */; };
 		E4A0A50316EB240100490F08 /* globe@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E4A0A50116EB240100490F08 /* globe@2x.png */; };
 		E4A0A50516EB28AE00490F08 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = E4A0A50416EB28AE00490F08 /* button.png */; };
@@ -83,7 +82,6 @@
 		E4A0A4E416EA92F300490F08 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E4A0A4E516EA92F300490F08 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		E4A0A4EE16EA92F300490F08 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
-		E4A0A4F116EA92F300490F08 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		E4A0A50016EB240100490F08 /* globe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = globe.png; sourceTree = "<group>"; };
 		E4A0A50116EB240100490F08 /* globe@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "globe@2x.png"; sourceTree = "<group>"; };
 		E4A0A50416EB28AE00490F08 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
@@ -240,7 +238,6 @@
 				E4F7D36316ED4B2A002D51FF /* Common */,
 				E41E0DC016EB8AD100310D34 /* External */,
 				E4A0A4FF16EB240100490F08 /* images */,
-				E4A0A4F016EA92F300490F08 /* MainStoryboard_iPad.storyboard */,
 				E4A0A4ED16EA92F300490F08 /* MainStoryboard_iPhone.storyboard */,
 				E4F7D35516ED1CDF002D51FF /* MainViewController.h */,
 				E4F7D35616ED1CE0002D51FF /* MainViewController.m */,
@@ -386,7 +383,6 @@
 			files = (
 				E4A0A4E016EA92F300490F08 /* InfoPlist.strings in Resources */,
 				E4A0A4EF16EA92F300490F08 /* MainStoryboard_iPhone.storyboard in Resources */,
-				E4A0A4F216EA92F300490F08 /* MainStoryboard_iPad.storyboard in Resources */,
 				E4A0A50216EB240100490F08 /* globe.png in Resources */,
 				E4A0A50316EB240100490F08 /* globe@2x.png in Resources */,
 				E4A0A50516EB28AE00490F08 /* button.png in Resources */,
@@ -455,14 +451,6 @@
 				E4A0A4EE16EA92F300490F08 /* en */,
 			);
 			name = MainStoryboard_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		E4A0A4F016EA92F300490F08 /* MainStoryboard_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E4A0A4F116EA92F300490F08 /* en */,
-			);
-			name = MainStoryboard_iPad.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
