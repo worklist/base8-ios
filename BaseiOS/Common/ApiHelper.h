@@ -6,12 +6,20 @@
 //  Copyright (c) 2013 HighFidelity.io. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+typedef void (^apiCompletion)(id response, NSError *error);
 
 @interface ApiHelper : NSObject
 
-#pragma mark - Sign in
++ (void)downloadTest:(apiCompletion)completio;
++ (void)uploadTest:(id)testData andCompletion:(apiCompletion)completion;
++ (void)getTestConfigurationWithCompletion:(apiCompletion)completion;
++ (void)setTestFail:(apiCompletion)completion;
++ (void)finishJob:(NSArray *)testData withCompletion:(apiCompletion)completion;
++ (void)getBalance:(apiCompletion)completion;
+
+
 + (void)signInWithTwitterData:(NSDictionary *)twitterData
-                andCompletion:(void(^)(NSDictionary *json, NSError *error))completion;
+                andCompletion:(apiCompletion)completion;
+
 
 @end

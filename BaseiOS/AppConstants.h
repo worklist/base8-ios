@@ -6,13 +6,14 @@
 //  Copyright (c) 2013 HighFidelity.io. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@class NSString;
 
 @interface AppConstants : NSObject
 
 extern NSString* const kApiURL;
-
 extern NSString* const kTwitterCounsumerKey;
 extern NSString* const kTwitterCounsumerSecret;
+extern NSString* const kUdpServer;
+extern uint16_t const kUdpPort;
 
 @end

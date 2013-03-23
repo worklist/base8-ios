@@ -6,8 +6,6 @@
 //  Copyright (c) 2013 HighFidelity.io. All rights reserved.
 //
 
-#import "AppDelegate.h"
-
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -36,13 +34,13 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [AppUserDefaultsHandler getCustomerBalance];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
-
 
 #pragma mark - Appearance Styles
 - (void)customAppearanceStyles
@@ -51,5 +49,32 @@
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"black"] forBarMetrics:UIBarMetricsDefault];
 }
 
+- (CLLocation *)currentLocation
+{
+    if (!_locationManager) {
+        _locationManager = [[CLLocationManager alloc] init];
+        self.locationManager.delegate = self;
+        [_locationManager startUpdatingLocation];
+    }
+    
+    CLLocation *userLocation = [Base8AppDelegate locationManager].location;
+    if (!userLocation) {
+        userLocation = [[CLLocation alloc] init];
+    }
+    
+    return userLocation;
+}
+
+- (void)signOut
+{
+    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+    
+    NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (NSHTTPCookie *cookie in cookieStorage.cookies) {
+        [cookieStorage deleteCookie:cookie];
+    }
+    [AppUserDefaultsHandler setCurrentCustomer:nil];
+}
 
 @end
