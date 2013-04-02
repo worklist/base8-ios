@@ -11,8 +11,8 @@
 
 @interface TwitterLoginViewController ()
 
-@property (nonatomic, strong) ACAccountStore *accountStore;
-@property (nonatomic, strong) NSArray *accounts;
+@property (strong, nonatomic) ACAccountStore *accountStore;
+@property (strong, nonatomic) NSArray *accounts;
 
 @property (weak, nonatomic) IBOutlet UIButton *buttonLogin;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityLogin;

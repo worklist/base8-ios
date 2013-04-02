@@ -8,7 +8,7 @@
 
 @protocol TestDelegate
 
-@property (nonatomic, strong) id testData;
+@property (strong, nonatomic) id testData;
 
 @optional
 - (void)onTestError:(NSError *)error;

@@ -10,13 +10,14 @@
 
 @interface Base8Test : NSObject
 
+@property (strong, nonatomic) id<TestDelegate> testDelegate;
+@property (nonatomic) int numberOfTests;
+@property (nonatomic) int currentTest;
+
 - (id)initWithDelegate:(id<TestDelegate>)delegate andNumberOfTests:(int)numberOfTests;
 - (void)start;
 - (void)didFinishWithTime:(int)averageTime;
 - (void)didFinishWithError:(NSError *)error;
 
-@property (nonatomic, strong) id<TestDelegate> testDelegate;
-@property (nonatomic) int numberOfTests;
-@property (nonatomic) int currentTest;
 
 @end

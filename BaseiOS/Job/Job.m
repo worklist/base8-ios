@@ -26,10 +26,7 @@
 - (id)initWithDelegate:(id<JobDelegate>)delegate
 {
     self = [super init];
-    if (self && delegate) {
-        self.jobDelegate = delegate;
-    }
-
+    self.jobDelegate = delegate;
     return self;
 }
 

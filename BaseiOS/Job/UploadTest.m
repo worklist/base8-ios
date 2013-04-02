@@ -25,9 +25,9 @@
 {
     self.currentTest++;
     
-    int startTime = (int) (CACurrentMediaTime() * 1000);
+    int startTime = CACurrentMediaTime() * 1000;
     [ApiHelper uploadTest:[self.testDelegate testData] andCompletion:^(id response, NSError *error) {
-        int endTime = (int) (CACurrentMediaTime() * 1000);
+        int endTime = CACurrentMediaTime() * 1000;
         if (error) {
             [super didFinishWithError:error];
             return;

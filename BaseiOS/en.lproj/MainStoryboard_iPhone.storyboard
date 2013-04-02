@@ -169,7 +169,6 @@
         <class className="MainViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MainViewController.h"/>
             <relationships>
-                <relationship kind="action" name="startJobTapped:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonStartJob" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="indicatorJob" candidateClass="UIActivityIndicatorView"/>
                 <relationship kind="outlet" name="labelBalance" candidateClass="UILabel"/>
@@ -179,7 +178,6 @@
         <class className="TwitterLoginViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TwitterLoginViewController.h"/>
             <relationships>
-                <relationship kind="action" name="twitterLoginTapped:"/>
                 <relationship kind="outlet" name="activityLogin" candidateClass="UIActivityIndicatorView"/>
                 <relationship kind="outlet" name="buttonLogin" candidateClass="UIButton"/>
             </relationships>

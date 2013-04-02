@@ -13,10 +13,7 @@
 - (id)initWithDelegate:(id<TestDelegate>)delegate andNumberOfTests:(int)numberOfTests
 {
     self = [super init];
-    if (self && delegate) {
-        self.testDelegate = delegate;
-    }
-    
+    self.testDelegate = delegate;
     self.numberOfTests = numberOfTests;
     return self;
 }
@@ -35,10 +32,9 @@
     }
 }
 
-
 - (void)start
 {
-    
+    // dummy 
 }
 
 @end

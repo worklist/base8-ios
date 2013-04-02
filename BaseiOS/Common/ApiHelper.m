@@ -25,12 +25,12 @@
 
 + (void)finishJob:(NSArray *)testData withCompletion:(apiCompletion)completion
 {
-    [self putAPICall:@"testend" parameters:testData andCompletion:completion];
+    [self putAPICall:@"test-end" parameters:testData andCompletion:completion];
 }
 
 + (void)getBalance:(apiCompletion)completion
 {
-    [self jsonAPICall:@"getbalance" withCompletion:completion];
+    [self jsonAPICall:@"get-balance" withCompletion:completion];
 }
 
 + (void)setTestFail:(apiCompletion)completion
@@ -75,7 +75,7 @@
                                          JSONRequestOperationWithRequest:request
                                          success:^(NSURLRequest *apiRequest, NSHTTPURLResponse *response, id JSON) {
                                              if (completion) {
-                                                 completion((NSDictionary *)JSON, nil);
+                                                 completion(JSON, nil);
                                              }
                                          }
                                          failure:^(NSURLRequest *apiRequest, NSHTTPURLResponse *response, NSError *error, id JSON) {

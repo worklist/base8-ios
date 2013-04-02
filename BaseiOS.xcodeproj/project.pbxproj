@@ -256,8 +256,6 @@
 		E4A0A4C916EA92F300490F08 = {
 			isa = PBXGroup;
 			children = (
-				E4E76B5B16FE2BC4002D054D /* QuartzCore.framework */,
-				E4E76B5916FE2B92002D054D /* CoreMedia.framework */,
 				E4A0A4DB16EA92F300490F08 /* BaseiOS */,
 				E4A0A4D416EA92F300490F08 /* Frameworks */,
 				E4A0A4D316EA92F300490F08 /* Products */,
@@ -276,6 +274,8 @@
 		E4A0A4D416EA92F300490F08 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E4E76B5B16FE2BC4002D054D /* QuartzCore.framework */,
+				E4E76B5916FE2B92002D054D /* CoreMedia.framework */,
 				E4048C9016F92371008E409D /* Security.framework */,
 				E4F4AD0216EBE07400BC406E /* Accounts.framework */,
 				E4F4AD0A16EBE31500BC406E /* CFNetwork.framework */,
