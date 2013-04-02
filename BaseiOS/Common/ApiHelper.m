@@ -14,46 +14,68 @@
 #pragma mark - API Calls
 + (void)downloadTest:(apiCompletion)completion
 {
-    [self getAPICall:@"downloadtest" parameters:nil andCompletion:completion];
+    [self httpApiCallwithMethod:@"GET"
+                           path:kDownloadTestApiMethod
+                     parameters:nil
+                  andCompletion:completion];
 }
 
 + (void)uploadTest:(id)testData andCompletion:(apiCompletion)completion
 {
     NSDictionary *params  = @{@"data": testData};
-    [self postAPICall:@"uploadtest" parameters:params andCompletion:completion];
+    [self httpApiCallwithMethod:@"POST"
+                           path:kUploadTestApiMethod
+                     parameters:params andCompletion:completion];
 }
 
 + (void)finishJob:(NSArray *)testData withCompletion:(apiCompletion)completion
 {
-    [self putAPICall:@"test-end" parameters:testData andCompletion:completion];
+    NSString *apiMethod = kTestEndApiMethod;
+    if (testData) {
+        NSString *urlParams = [testData componentsJoinedByString:@"/"];
+        apiMethod = [NSString stringWithFormat:@"%@/%@", kTestEndApiMethod, urlParams];
+    }
+    
+    [self httpApiCallwithMethod:@"PUT"
+                           path:apiMethod
+                     parameters:nil
+                  andCompletion:completion];
 }
 
 + (void)getBalance:(apiCompletion)completion
 {
-    [self jsonAPICall:@"get-balance" withCompletion:completion];
+    [self jsonAPICall:kGetBalanceApiMethod withParams:nil andCompletion:completion];
 }
 
 + (void)setTestFail:(apiCompletion)completion
 {
-    [self putAPICall:@"testfail" parameters:nil andCompletion:completion];
+    [self jsonAPICall:kTestFailApiMethod withParams:nil andCompletion:completion];
 }
 
 + (void)getTestConfigurationWithCompletion:(apiCompletion)completion
 {
-    [self jsonAPICall:@"testrequest" withCompletion:completion];
+    [self jsonAPICall:kTestRequestApiMethod withParams:nil andCompletion:completion];
 }
 
 + (void)signInWithTwitterData:(NSDictionary *)twitterData
                 andCompletion:(apiCompletion)completion
-{    
-    [self postAPICall:@"signin" parameters:twitterData andCompletion:completion];
+{
+    [self httpApiCallwithMethod:@"POST"
+                           path:kSignInApiMethod
+                     parameters:twitterData andCompletion:completion];
 }
 
 #pragma mark - private helpers
 
-+ (void)jsonAPICall:(NSString *)apiMethod withCompletion:(apiCompletion)completion
++ (AFHTTPClient *)sharedHTTPClient
 {
-    [self jsonAPICall:apiMethod withParams:nil andCompletion:completion];
+    __strong static AFHTTPClient *httpClient = nil;
+    if (!httpClient) {
+        NSURL *apiUrl = [NSURL URLWithString:kApiURL];
+        httpClient = [[AFHTTPClient alloc] initWithBaseURL:apiUrl];
+    }
+    
+    return httpClient;
 }
 
 + (void)jsonAPICall:(NSString *)apiMethod
@@ -108,11 +130,9 @@
                    parameters:(NSDictionary *)params
                 andCompletion:(apiCompletion)completion
 {
-
-    NSURL *apiUrl = [NSURL URLWithString:kApiURL];
-    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:apiUrl];
-    NSURLRequest *request = [httpClient requestWithMethod:method path:apiMethod parameters:params];
-    AFHTTPRequestOperation *operation = [httpClient
+    
+    NSURLRequest *request = [[self sharedHTTPClient] requestWithMethod:method path:apiMethod parameters:params];
+    AFHTTPRequestOperation *operation = [[self sharedHTTPClient]
             HTTPRequestOperationWithRequest:request
                                     success:^(AFHTTPRequestOperation *requestOperation, id responseObject) {
 
@@ -156,44 +176,7 @@
                                         }
                                     }];
 
-    [httpClient enqueueHTTPRequestOperation:operation];
+    [[self sharedHTTPClient] enqueueHTTPRequestOperation:operation];
 }
-
-+ (void)getAPICall:(NSString *)apiMethod
-        parameters:(NSDictionary *)params
-     andCompletion:(apiCompletion)completion
-{
-    [self httpApiCallwithMethod:@"GET"
-                           path:apiMethod
-                     parameters:params andCompletion:completion];
-    
-}
-
-+ (void)postAPICall:(NSString *)apiMethod
-         parameters:(NSDictionary *)params
-      andCompletion:(apiCompletion)completion
-{
-    [self httpApiCallwithMethod:@"POST"
-                           path:apiMethod
-                     parameters:params andCompletion:completion];
-
-}
-
-+ (void)putAPICall:(NSString *)apiMethod
-         parameters:(NSArray *)params
-      andCompletion:(apiCompletion)completion
-{
-    if (params) {
-        NSString *urlParams = [params componentsJoinedByString:@"/"];
-        apiMethod = [NSString stringWithFormat:@"%@/%@", apiMethod, urlParams];
-    }
-
-    [self httpApiCallwithMethod:@"PUT"
-                           path:apiMethod
-                     parameters:nil
-                  andCompletion:completion];
-
-}
-
 
 @end

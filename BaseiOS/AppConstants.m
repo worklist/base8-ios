@@ -22,4 +22,13 @@ uint16_t const kUdpPort = 55110;
 
 #endif
 
+// api methods constants
+NSString* const kSignInApiMethod = @"signin";
+NSString* const kDownloadTestApiMethod = @"downloadtest";
+NSString* const kUploadTestApiMethod = @"uploadtest";
+NSString* const kTestEndApiMethod = @"test-end";
+NSString* const kGetBalanceApiMethod = @"get-balance";
+NSString* const kTestFailApiMethod = @"testfail";
+NSString* const kTestRequestApiMethod = @"testrequest";
+
 @end
