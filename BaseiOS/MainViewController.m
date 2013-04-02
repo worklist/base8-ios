@@ -32,23 +32,21 @@
     labelNavTitle.textColor = [UIColor whiteColor];
     labelNavTitle.backgroundColor = [UIColor clearColor];
 
-    labelNavTitle.textAlignment = (NSTextAlignment) UITextAlignmentLeft;
+    labelNavTitle.textAlignment = NSTextAlignmentLeft;
     Customer *currentCustomer = AppUserDefaultsHandler.currentCustomer;
 
     if (currentCustomer) {
         labelNavTitle.text = [NSString stringWithFormat:@"@%@", currentCustomer.twitterName];
-        self.labelBalance.text = [NSString stringWithFormat:@"%.2f pc", currentCustomer.balance];
     } else {
 
         labelNavTitle.text = @"";
-        self.labelBalance.text = @"";
-
         TwitterLoginViewController *viewController = [[UIStoryboard storyboardWithName:@"MainStoryboard_iPhone"
                                                                                 bundle:nil]
                 instantiateViewControllerWithIdentifier:@"loginView"];
         [self presentViewController:viewController animated:NO completion:nil];
     }
-
+    
+    [self updateCustomerBalanceLabel];
     self.navigationItem.titleView = labelNavTitle;
     self.textViewLog.text = @"";
 }
@@ -67,7 +65,19 @@
                 instantiateViewControllerWithIdentifier:@"loginView"];
         [self presentViewController:viewController animated:YES completion:nil];
     } else {
-        self.labelBalance.text = [NSString stringWithFormat:@"%2.f pc", AppUserDefaultsHandler.currentCustomer.balance];
+        [self updateCustomerBalanceLabel];
+    }
+}
+
+- (void)updateCustomerBalanceLabel
+{
+    Customer *currentCustomer = AppUserDefaultsHandler.currentCustomer;
+    
+    if (currentCustomer) {
+        NSString *balanceText = [NSString stringWithFormat:@"%.2f pc", currentCustomer.balance];
+        self.labelBalance.text = balanceText;
+    } else {
+        self.labelBalance.text = @"";
     }
 }
 
@@ -100,7 +110,6 @@
     [self.indicatorJob stopAnimating];
     
     [AppUserDefaultsHandler getCustomerBalance];
-    self.labelBalance.text = [NSString stringWithFormat:@"%.2f pc", AppUserDefaultsHandler.currentCustomer.balance];
 
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Job done"
                                                     message:@"You have been credited with 1PC"

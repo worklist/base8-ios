@@ -8,9 +8,9 @@
 
 #import "DownloadTest.h"
 
-@interface DownloadTest() {
-    int averageTime;
-}
+@interface DownloadTest()
+
+@property (nonatomic) int averageTime;
 
 @end
 
@@ -32,11 +32,11 @@
             [super didFinishWithError:error];
             return;
         }
-        averageTime = (averageTime * (self.currentTest - 1) + (endTime - startTime)) / self.currentTest;
+        self.averageTime = (self.averageTime * (self.currentTest - 1) + (endTime - startTime)) / self.currentTest;
         
         if (self.currentTest >= self.numberOfTests) {
             [self.testDelegate setTestData:responseObject];
-            [super didFinishWithTime:averageTime];
+            [super didFinishWithTime:self.averageTime];
             
         } else {
             [self downloadData];

@@ -12,11 +12,11 @@
 @property (strong, nonatomic) NSNumber *twitterId;
 @property (strong, nonatomic) NSString *twitterName;
 @property (strong, nonatomic) NSString *nickname;
-@property (nonatomic) double balance;
 @property (strong, nonatomic) NSDate *joinDate;
 @property (strong, nonatomic) NSString *oauthToken;
 @property (strong, nonatomic) NSString *oauthSecret;
 @property (strong, nonatomic) CLLocation *location;
+@property (nonatomic) double balance;
 
 -(id)initFromDictionary:(NSDictionary *)userDict;
 

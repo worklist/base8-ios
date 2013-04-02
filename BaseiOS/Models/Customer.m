@@ -11,7 +11,6 @@
 {
     self = [super init];
     if (self) {
-        
         self.customerId = userDict[@"id"];
         self.twitterId = userDict[@"twitterId"];
         self.twitterName = userDict[@"twitterName"];
@@ -28,7 +27,6 @@
 {
     self = [super init];
     if (self) {
-        
         @try {
             
             self.customerId = [decoder decodeObjectForKey:@"id"];
@@ -44,7 +42,6 @@
         } @catch (NSException *e) {
             NSLog(@"Exception: %@", e);
         }
-        
     }
     return self;
 }

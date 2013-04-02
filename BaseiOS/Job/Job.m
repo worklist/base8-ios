@@ -11,11 +11,10 @@
 #import "DownloadTest.h"
 #import "UploadTest.h"
 
-@interface Job() {
-    int numberOfTests;
-}
+@interface Job()
 
-@property (nonatomic, assign) id<JobDelegate> jobDelegate;
+@property (nonatomic) id<JobDelegate> jobDelegate;
+@property (nonatomic) int numberOfTests;
 
 @end
 
@@ -34,11 +33,11 @@
 {
     [ApiHelper getTestConfigurationWithCompletion:^(id response, NSError *error) {
         if (error) {
-            if (self.jobDelegate && [(NSObject*)self.jobDelegate respondsToSelector:@selector(onError:)]) {
+            if ([(NSObject*)self.jobDelegate respondsToSelector:@selector(onError:)]) {
                 [self.jobDelegate onError:error];
             }
         } else {
-            numberOfTests = [response[@"test_runs"] integerValue];
+            self.numberOfTests = [response[@"test_runs"] integerValue];
             [self startUdpTest];
         }
     }];
@@ -46,36 +45,33 @@
 
 - (void)startUdpTest
 {
-    if (self.jobDelegate && [(NSObject*)self.jobDelegate respondsToSelector:@selector(onJobLog:)]) {
+    if ([(NSObject*)self.jobDelegate respondsToSelector:@selector(onJobLog:)]) {
         [self.jobDelegate onJobLog:@"ping test"];
     }
 
-    UdpTest *udp = [[UdpTest alloc] initWithDelegate:self andNumberOfTests:numberOfTests];
+    UdpTest *udp = [[UdpTest alloc] initWithDelegate:self andNumberOfTests:self.numberOfTests];
     [udp performSelectorInBackground:@selector(start) withObject:nil];
-    //[udp start];
 }
 
 - (void)startDownloadTest
 {
 
-    if (self.jobDelegate && [(NSObject*)self.jobDelegate respondsToSelector:@selector(onJobLog:)]) {
+    if ([(NSObject*)self.jobDelegate respondsToSelector:@selector(onJobLog:)]) {
         [self.jobDelegate onJobLog:@"download test"];
     }
 
-    DownloadTest *download = [[DownloadTest alloc] initWithDelegate:self andNumberOfTests:numberOfTests];
+    DownloadTest *download = [[DownloadTest alloc] initWithDelegate:self andNumberOfTests:self.numberOfTests];
     [download performSelectorInBackground:@selector(start) withObject:nil];
-    //[download start];
 }
 
 - (void)startUploadTest
 {
-    if (self.jobDelegate && [(NSObject*)self.jobDelegate respondsToSelector:@selector(onJobLog:)]) {
+    if ([(NSObject*)self.jobDelegate respondsToSelector:@selector(onJobLog:)]) {
         [self.jobDelegate onJobLog:@"upload test"];
     }
 
-    UploadTest *upload = [[UploadTest alloc] initWithDelegate:self andNumberOfTests:numberOfTests];
+    UploadTest *upload = [[UploadTest alloc] initWithDelegate:self andNumberOfTests:self.numberOfTests];
     [upload performSelectorInBackground:@selector(start) withObject:nil];
-    //[upload start];
 }
 
 - (void)test:(id)test didFinishWithDeviceTime:(int)deviceAverage andServerTime:(int)serverAverage
@@ -110,9 +106,7 @@
                 [self startUploadTest];
             }
         }];
-    }
-
-    if ([test isKindOfClass:[UploadTest class]]) {
+    } else if ([test isKindOfClass:[UploadTest class]]) {
 
         [self logStatus:[NSString stringWithFormat:@"average upload time: %dms", average]];
         NSArray *testResults = @[
@@ -135,7 +129,7 @@
 
 - (void)logStatus:(NSString *)logLine
 {
-    if (self.jobDelegate && [(NSObject*)self.jobDelegate respondsToSelector:@selector(onJobLog:)]) {
+    if ([(NSObject*)self.jobDelegate respondsToSelector:@selector(onJobLog:)]) {
         [self.jobDelegate onJobLog:logLine];
     }
 }
@@ -143,7 +137,7 @@
 - (void)test:(id)test didFinishWithError:(NSError *)error
 {
     [ApiHelper setTestFail:^(NSDictionary *json, NSError *apiError) {
-        if (self.jobDelegate && [(NSObject*)self.jobDelegate respondsToSelector:@selector(onError:)]) {
+        if ([(NSObject*)self.jobDelegate respondsToSelector:@selector(onError:)]) {
             [self.jobDelegate onError:error];
         }
         [self logStatus:[NSString stringWithFormat:@"Error occurred: %@", error.localizedDescription]];
