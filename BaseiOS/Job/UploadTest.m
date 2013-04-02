@@ -8,9 +8,10 @@
 
 #import "UploadTest.h"
 
-@interface UploadTest() {
-    int averageTime;
-}
+@interface UploadTest()
+
+@property (nonatomic) int averageTime;
+
 
 @end
 
@@ -32,10 +33,10 @@
             [super didFinishWithError:error];
             return;
         }
-        averageTime = (averageTime * (self.currentTest - 1) + (endTime - startTime)) / self.currentTest;
+        self.averageTime = (self.averageTime * (self.currentTest - 1) + (endTime - startTime)) / self.currentTest;
         
         if (self.currentTest >= self.numberOfTests) {
-            [super didFinishWithTime:averageTime];
+            [super didFinishWithTime:self.averageTime];
         } else {
             [self uploadData];
         }
