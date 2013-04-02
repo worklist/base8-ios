@@ -59,7 +59,7 @@
 - (void)udpSocket:(GCDAsyncUdpSocket *)socket didNotSendDataWithTag:(long)tag dueToError:(NSError *)error
 {
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
-    if (self.testDelegate && [(NSObject*)self.testDelegate respondsToSelector:@selector(onTestError:)]) {
+    if ([(NSObject*)self.testDelegate respondsToSelector:@selector(onTestError:)]) {
         [self.testDelegate onTestError:error];
     }
 }
@@ -96,7 +96,7 @@ withFilterContext:(id)filterContext
     }
     
     if (self.currentTest >= self.numberOfTests) {
-        if (self.testDelegate && [(NSObject*)self.testDelegate respondsToSelector:@selector(test:didFinishWithDeviceTime:andServerTime:)]) {
+        if ([(NSObject*)self.testDelegate respondsToSelector:@selector(test:didFinishWithDeviceTime:andServerTime:)]) {
             [self.testDelegate test:self didFinishWithDeviceTime:self.averageDeviceTime andServerTime:self.averageServerTime];
             [self.udpSocket close];
         }

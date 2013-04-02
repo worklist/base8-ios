@@ -20,14 +20,14 @@
 
 - (void)didFinishWithError:(NSError *)error
 {
-    if (self.testDelegate && [(NSObject*)self.testDelegate respondsToSelector:@selector(test:didFinishWithError:)]) {
+    if ([(NSObject*)self.testDelegate respondsToSelector:@selector(test:didFinishWithError:)]) {
         [self.testDelegate test:self didFinishWithError:error];
     }
 }
 
 - (void)didFinishWithTime:(int)averageTime
 {
-    if (self.testDelegate && [(NSObject*)self.testDelegate respondsToSelector:@selector(test:didFinishWithTime:)]) {
+    if ([(NSObject*)self.testDelegate respondsToSelector:@selector(test:didFinishWithTime:)]) {
         [self.testDelegate test:self didFinishWithTime:averageTime];
     }
 }
