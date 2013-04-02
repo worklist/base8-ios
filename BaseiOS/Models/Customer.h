@@ -15,7 +15,6 @@
 @property (strong, nonatomic) NSDate *joinDate;
 @property (strong, nonatomic) NSString *oauthToken;
 @property (strong, nonatomic) NSString *oauthSecret;
-@property (strong, nonatomic) CLLocation *location;
 @property (nonatomic) double balance;
 
 -(id)initFromDictionary:(NSDictionary *)userDict;

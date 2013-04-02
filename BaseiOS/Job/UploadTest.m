@@ -12,7 +12,6 @@
 
 @property (nonatomic) int averageTime;
 
-
 @end
 
 @implementation UploadTest

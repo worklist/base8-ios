@@ -36,7 +36,6 @@
             self.joinDate = [decoder decodeObjectForKey:@"joinDate"];
             self.oauthToken = [decoder decodeObjectForKey:@"oauthToken"];
             self.oauthSecret = [decoder decodeObjectForKey:@"oauthSecret"];
-            self.location = [decoder decodeObjectForKey:@"location"];
             self.balance = [decoder decodeDoubleForKey:@"balance"];
             
         } @catch (NSException *e) {
@@ -56,7 +55,6 @@
     [encoder encodeObject:self.joinDate forKey:@"joinDate"];
     [encoder encodeObject:self.oauthToken forKey:@"oauthToken"];
     [encoder encodeObject:self.oauthSecret forKey:@"oauthSecret"];
-    [encoder encodeObject:self.location forKey:@"location"];
 }
 
 

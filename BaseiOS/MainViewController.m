@@ -37,6 +37,12 @@
 
     if (currentCustomer) {
         labelNavTitle.text = [NSString stringWithFormat:@"@%@", currentCustomer.twitterName];
+        
+        CLLocation *userLocation = [Base8AppDelegate locationManager].location;
+        if (!userLocation) {
+            userLocation = [[CLLocation alloc] init];
+        }
+        
     } else {
 
         labelNavTitle.text = @"";

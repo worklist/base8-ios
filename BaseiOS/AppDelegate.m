@@ -6,7 +6,16 @@
 //  Copyright (c) 2013 HighFidelity.io. All rights reserved.
 //
 
+
+@interface AppDelegate()
+
+@property (strong, nonatomic) CLLocationManager *_lazyManager;
+
+@end
+
 @implementation AppDelegate
+
+@synthesize locationManager = _locationManager;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -20,27 +29,23 @@
     [AppUserDefaultsHandler getCustomerBalance];
 }
 
+- (CLLocationManager *)locationManager
+{
+    if (!_locationManager) {
+        _locationManager = [[CLLocationManager alloc] init];
+        _locationManager.delegate = self;
+        [_locationManager startUpdatingLocation];
+    }
+    
+    return _locationManager;
+}
+
+
 #pragma mark - Appearance Styles
 - (void)customAppearanceStyles
 {
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"black"] forBarMetrics:UIBarMetricsDefault];
-}
-
-- (CLLocation *)currentLocation
-{
-    if (!_locationManager) {
-        _locationManager = [[CLLocationManager alloc] init];
-        self.locationManager.delegate = self;
-        [_locationManager startUpdatingLocation];
-    }
-    
-    CLLocation *userLocation = [Base8AppDelegate locationManager].location;
-    if (!userLocation) {
-        userLocation = [[CLLocation alloc] init];
-    }
-    
-    return userLocation;
 }
 
 - (void)signOut

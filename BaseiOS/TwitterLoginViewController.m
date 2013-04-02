@@ -88,7 +88,6 @@
                                                                       
                                                                       NSDictionary *customer = json[@"customer"];
                                                                       Customer *currentCustomer = [[Customer alloc] initFromDictionary:customer];
-                                                                      currentCustomer.location = [Base8AppDelegate currentLocation];
                                                                       [AppUserDefaultsHandler setCurrentCustomer:currentCustomer];
                                                                       [self dismissModalViewControllerAnimated:YES];
                                                                       

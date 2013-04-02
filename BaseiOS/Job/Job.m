@@ -113,11 +113,11 @@
                 @"upload",
                 [NSNumber numberWithInt:average],
                 @0,
-                [NSNumber numberWithDouble:AppUserDefaultsHandler.currentCustomer.location.coordinate.latitude],
-                [NSNumber numberWithDouble:AppUserDefaultsHandler.currentCustomer.location.coordinate.longitude]
+                [NSNumber numberWithDouble:[Base8AppDelegate locationManager].location.coordinate.latitude],
+                [NSNumber numberWithDouble:[Base8AppDelegate locationManager].location.coordinate.longitude]
         ];
 
-        [ApiHelper finishJob:testResults  withCompletion:^(id response, NSError *error) {
+        [ApiHelper finishJob:testResults withCompletion:^(id response, NSError *error) {
             if (!error) {
                 if ([(NSObject *)self.jobDelegate respondsToSelector:@selector(didFinish:)]) {
                     [self.jobDelegate didFinish:@"OK"];
