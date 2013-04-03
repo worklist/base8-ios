@@ -56,7 +56,6 @@
 
 - (void)startDownloadTest
 {
-
     if ([(NSObject*)self.jobDelegate respondsToSelector:@selector(onJobLog:)]) {
         [self.jobDelegate onJobLog:@"download test"];
     }
@@ -79,52 +78,21 @@
 {
     if ([test isKindOfClass:[UdpTest class]]) {
         [self logStatus:[NSString stringWithFormat:@"average ping time: %dms (%dms)", deviceAverage, serverAverage]];
-        NSArray *testResults = @[
-                @"udp",
-                [NSNumber numberWithInt:deviceAverage],
-                [NSNumber numberWithInt:serverAverage]
-        ];
-
-        [ApiHelper finishJob:testResults withCompletion:^(id response, NSError *error) {
-            if (!error) {
-                [self startDownloadTest];
-            }
-        }];
+        [self startDownloadTest];
     }
 }
 
 - (void)test:(id)test didFinishWithTime:(int)average
 {
     if ([test isKindOfClass:[DownloadTest class]]) {
-
         [self logStatus:[NSString stringWithFormat:@"average download time: %dms", average]];
-        NSArray *testResults = @[
-                @"download",
-                [NSNumber numberWithInt:average]
-        ];
-        [ApiHelper finishJob:testResults  withCompletion:^(id response, NSError *error) {
-            if (!error) {
-                [self startUploadTest];
-            }
-        }];
     } else if ([test isKindOfClass:[UploadTest class]]) {
 
         [self logStatus:[NSString stringWithFormat:@"average upload time: %dms", average]];
-        NSArray *testResults = @[
-                @"upload",
-                [NSNumber numberWithInt:average],
-                @0,
-                [NSNumber numberWithDouble:[Base8AppDelegate locationManager].location.coordinate.latitude],
-                [NSNumber numberWithDouble:[Base8AppDelegate locationManager].location.coordinate.longitude]
-        ];
-
-        [ApiHelper finishJob:testResults withCompletion:^(id response, NSError *error) {
-            if (!error) {
-                if ([(NSObject *)self.jobDelegate respondsToSelector:@selector(didFinish:)]) {
-                    [self.jobDelegate didFinish:@"OK"];
-                }
-            }
-        }];
+        
+        if ([(NSObject *)self.jobDelegate respondsToSelector:@selector(didFinish:)]) {
+            [self.jobDelegate didFinish:@"OK"];
+        }
     }
 }
 

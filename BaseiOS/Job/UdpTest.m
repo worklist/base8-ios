@@ -45,7 +45,7 @@
 {
     self.udpSocket = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
     NSError *error = nil;
-
+    
     if (![self.udpSocket bindToPort:0 error:&error])	{
         NSLog(@"Error binding: %@", error);
         return;
@@ -73,7 +73,7 @@ withFilterContext:(id)filterContext
     NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     
     if ([msg hasPrefix:@"R"]) {
-
+        
         double serverTime = [[msg substringFromIndex:1] doubleValue] * 1000;
         double clientTime = [[NSDate date] timeIntervalSince1970] * 1000;
         
@@ -84,22 +84,38 @@ withFilterContext:(id)filterContext
             self.averageDeviceTime = (self.averageDeviceTime * (self.currentTest - 1) + clientRTT) / self.currentTest;
             self.averageServerTime = (self.averageServerTime * (self.currentTest - 1) + serverRTT) / self.currentTest;
         }
-
+        
         self.serverStartTime = serverTime;
         self.clientStartTime = clientTime;
     } else {
         NSString *host = nil;
         uint16_t port = 0;
         [GCDAsyncUdpSocket getHost:&host port:&port fromAddress:address];
-
+        
         NSLog(@"RECV: Unknown message from: %@:%hu", host, port);
     }
     
     if (self.currentTest >= self.numberOfTests) {
-        if ([(NSObject*)self.testDelegate respondsToSelector:@selector(test:didFinishWithDeviceTime:andServerTime:)]) {
-            [self.testDelegate test:self didFinishWithDeviceTime:self.averageDeviceTime andServerTime:self.averageServerTime];
-            [self.udpSocket close];
-        }
+        [self.udpSocket close];
+        NSArray *testResults = @[
+            @"udp",
+            [NSNumber numberWithInt:self.averageDeviceTime],
+            [NSNumber numberWithInt:self.averageServerTime]
+        ];
+        
+        [ApiHelper finishJob:testResults withCompletion:^(id response, NSError *error) {
+            if (!error) {
+                if ([(NSObject*)self.testDelegate respondsToSelector:@selector(test:didFinishWithDeviceTime:andServerTime:)]) {
+                    [self.testDelegate test:self
+                    didFinishWithDeviceTime:self.averageDeviceTime
+                              andServerTime:self.averageServerTime];
+                }
+            } else {
+                [self.testDelegate test:self
+                     didFinishWithError:error];
+            }
+        }];
+        
     } else {
         [self sendData];
     }

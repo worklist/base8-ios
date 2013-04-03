@@ -35,8 +35,19 @@
         self.averageTime = (self.averageTime * (self.currentTest - 1) + (endTime - startTime)) / self.currentTest;
         
         if (self.currentTest >= self.numberOfTests) {
-            [self.testDelegate setTestData:responseObject];
-            [super didFinishWithTime:self.averageTime];
+            NSArray *testResults = @[
+                @"download",
+                [NSNumber numberWithInt:self.averageTime]
+            ];
+            
+            [ApiHelper finishJob:testResults  withCompletion:^(id response, NSError *error) {
+                if (!error) {
+                    [self.testDelegate setTestData:responseObject];
+                    [super didFinishWithTime:self.averageTime];
+                } else {
+                    [self didFinishWithError:error];
+                }
+            }];
             
         } else {
             [self downloadData];

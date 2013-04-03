@@ -35,7 +35,22 @@
         self.averageTime = (self.averageTime * (self.currentTest - 1) + (endTime - startTime)) / self.currentTest;
         
         if (self.currentTest >= self.numberOfTests) {
-            [super didFinishWithTime:self.averageTime];
+            
+            NSArray *testResults = @[
+                @"upload",
+                [NSNumber numberWithInt:self.averageTime],
+                @0,
+                [NSNumber numberWithDouble:[Base8AppDelegate locationManager].location.coordinate.latitude],
+                [NSNumber numberWithDouble:[Base8AppDelegate locationManager].location.coordinate.longitude]
+            ];
+            
+            [ApiHelper finishJob:testResults withCompletion:^(id response, NSError *error) {
+                if (!error) {
+                    [super didFinishWithTime:self.averageTime];
+                } else {
+                    [super didFinishWithError:error];
+                }
+            }];
         } else {
             [self uploadData];
         }
