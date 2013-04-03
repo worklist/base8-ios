@@ -13,7 +13,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic, readonly) CLLocationManager *locationManager;
+@property (strong, nonatomic) CLLocationManager *locationManager;
 
 - (void)signOut;
 

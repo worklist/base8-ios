@@ -12,9 +12,10 @@
 
 - (id)initWithDelegate:(id<TestDelegate>)delegate andNumberOfTests:(int)numberOfTests
 {
-    self = [super init];
-    self.testDelegate = delegate;
-    self.numberOfTests = numberOfTests;
+    if (self = [super init]) {
+        self.testDelegate = delegate;
+        self.numberOfTests = numberOfTests;
+    }
     return self;
 }
 

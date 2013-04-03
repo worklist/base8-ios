@@ -6,16 +6,7 @@
 //  Copyright (c) 2013 HighFidelity.io. All rights reserved.
 //
 
-
-@interface AppDelegate()
-
-@property (strong, nonatomic) CLLocationManager *_lazyManager;
-
-@end
-
 @implementation AppDelegate
-
-@synthesize locationManager = _locationManager;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
