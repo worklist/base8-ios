@@ -128,6 +128,7 @@
 - (void)onError:(NSError *)error
 {
     self.buttonStartJob.enabled = YES;
+    self.buttonStartJob.alpha = 1;
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
                                                     message:error.localizedDescription
                                                    delegate:nil
