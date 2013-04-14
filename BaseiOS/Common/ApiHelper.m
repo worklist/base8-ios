@@ -7,6 +7,9 @@
 //
 
 #import "AFNetworking.h"
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
+#import <CoreTelephony/CTCarrier.h>
+
 #define ERROR_HEADER_KEY @"X-Status-Reason"
 
 @implementation ApiHelper
@@ -28,17 +31,28 @@
                      parameters:params andCompletion:completion];
 }
 
-+ (void)finishJob:(NSArray *)testData withCompletion:(apiCompletion)completion
++ (void)finishJob:(NSDictionary *)testData withCompletion:(apiCompletion)completion
 {
-    NSString *apiMethod = kTestEndApiMethod;
-    if (testData) {
-        NSString *urlParams = [testData componentsJoinedByString:@"/"];
-        apiMethod = [NSString stringWithFormat:@"%@/%@", kTestEndApiMethod, urlParams];
+    
+    NSMutableDictionary *postData  = [testData mutableCopy];
+    
+    NSURL *url = [NSURL URLWithString:kApiURL];
+    
+    SCNetworkReachabilityFlags flags;
+    SCNetworkReachabilityRef reachability = SCNetworkReachabilityCreateWithName(NULL, [url.host UTF8String]);
+    
+    if (SCNetworkReachabilityGetFlags(reachability, &flags) && (flags & kSCNetworkFlagsReachable) == kSCNetworkFlagsReachable)
+    {
+        NSString *connectionType = @"WiFi";
+        if ((flags & kSCNetworkReachabilityFlagsIsWWAN) == kSCNetworkReachabilityFlagsIsWWAN) {
+            connectionType = @"Mobile network";
+        }
+        [postData setObject:connectionType forKey:@"device_connection"];
     }
     
-    [self httpApiCallwithMethod:@"PUT"
-                           path:apiMethod
-                     parameters:nil
+    [self httpApiCallwithMethod:@"POST"
+                           path:kTestEndApiMethod
+                     parameters:postData
                   andCompletion:completion];
 }
 
@@ -60,9 +74,19 @@
 + (void)signInWithTwitterData:(NSDictionary *)twitterData
                 andCompletion:(apiCompletion)completion
 {
+    
+    CTTelephonyNetworkInfo *netinfo = [[CTTelephonyNetworkInfo alloc] init];
+    CTCarrier *carrier = [netinfo subscriberCellularProvider];
+    
+    NSMutableDictionary *postData  = [twitterData mutableCopy];
+    if (carrier) {
+        [postData setObject:[carrier carrierName] forKey:@"carrier"];
+    }
+    
     [self httpApiCallwithMethod:@"POST"
                            path:kSignInApiMethod
-                     parameters:twitterData andCompletion:completion];
+                     parameters:postData
+                  andCompletion:completion];
 }
 
 #pragma mark - private helpers

@@ -14,7 +14,7 @@ typedef void (^apiCompletion)(id response, NSError *error);
 + (void)uploadTest:(id)testData andCompletion:(apiCompletion)completion;
 + (void)getTestConfigurationWithCompletion:(apiCompletion)completion;
 + (void)setTestFail:(apiCompletion)completion;
-+ (void)finishJob:(NSArray *)testData withCompletion:(apiCompletion)completion;
++ (void)finishJob:(NSDictionary *)testData withCompletion:(apiCompletion)completion;
 + (void)getBalance:(apiCompletion)completion;
 + (void)signInWithTwitterData:(NSDictionary *)twitterData
                 andCompletion:(apiCompletion)completion;
