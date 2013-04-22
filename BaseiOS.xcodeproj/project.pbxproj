@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E401902316FA51C20089FBD3 /* Job.m in Sources */ = {isa = PBXBuildFile; fileRef = E401902216FA51C20089FBD3 /* Job.m */; };
 		E401902916FB81E80089FBD3 /* UdpTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E401902816FB81E80089FBD3 /* UdpTest.m */; };
+		E402A352171721FB003CE4E3 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E402A351171721FB003CE4E3 /* CoreTelephony.framework */; };
 		E4048C8E16F92101008E409D /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = E4048C8B16F92101008E409D /* GCDAsyncSocket.m */; };
 		E4048C8F16F92101008E409D /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = E4048C8D16F92101008E409D /* GCDAsyncUdpSocket.m */; };
 		E4048C9116F92371008E409D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4048C9016F92371008E409D /* Security.framework */; };
@@ -73,6 +74,7 @@
 		E401902216FA51C20089FBD3 /* Job.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Job.m; sourceTree = "<group>"; };
 		E401902716FB81E80089FBD3 /* UdpTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UdpTest.h; sourceTree = "<group>"; };
 		E401902816FB81E80089FBD3 /* UdpTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UdpTest.m; sourceTree = "<group>"; };
+		E402A351171721FB003CE4E3 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		E4048C8A16F92101008E409D /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
 		E4048C8B16F92101008E409D /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		E4048C8C16F92101008E409D /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E402A352171721FB003CE4E3 /* CoreTelephony.framework in Frameworks */,
 				E4E76B5C16FE2BC4002D054D /* QuartzCore.framework in Frameworks */,
 				E4048C9216F923BB008E409D /* CFNetwork.framework in Frameworks */,
 				E4048C9116F92371008E409D /* Security.framework in Frameworks */,
@@ -274,6 +277,7 @@
 		E4A0A4D416EA92F300490F08 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E402A351171721FB003CE4E3 /* CoreTelephony.framework */,
 				E4E76B5B16FE2BC4002D054D /* QuartzCore.framework */,
 				E4E76B5916FE2B92002D054D /* CoreMedia.framework */,
 				E4048C9016F92371008E409D /* Security.framework */,

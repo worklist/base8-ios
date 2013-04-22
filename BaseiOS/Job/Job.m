@@ -86,6 +86,7 @@
 {
     if ([test isKindOfClass:[DownloadTest class]]) {
         [self logStatus:[NSString stringWithFormat:@"average download time: %dms", average]];
+        [self startUploadTest];
     } else if ([test isKindOfClass:[UploadTest class]]) {
 
         [self logStatus:[NSString stringWithFormat:@"average upload time: %dms", average]];

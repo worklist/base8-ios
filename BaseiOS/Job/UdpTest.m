@@ -97,11 +97,11 @@ withFilterContext:(id)filterContext
     
     if (self.currentTest >= self.numberOfTests) {
         [self.udpSocket close];
-        NSArray *testResults = @[
-            @"udp",
-            [NSNumber numberWithInt:self.averageDeviceTime],
-            [NSNumber numberWithInt:self.averageServerTime]
-        ];
+        NSDictionary *testResults = @{
+            @"type" : @"udp",
+            @"runtime" : [NSNumber numberWithInt:self.averageDeviceTime],
+            @"servertime" : [NSNumber numberWithInt:self.averageServerTime]
+        };
         
         [ApiHelper finishJob:testResults withCompletion:^(id response, NSError *error) {
             if (!error) {
